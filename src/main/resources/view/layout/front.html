@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="bg-black text-zinc-300 min-h-screen">
+    <nav class="sticky top-0 z-50 border-b border-zinc-900 bg-black/90 backdrop-blur">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/" class="text-white font-bold text-lg hover:text-red-500 transition-colors">
+                Blog_<span class="text-red-500 animate-blink">|</span>
+            </a>
+            <div class="flex items-center gap-6 text-xs text-zinc-500">
+                <a href="/" class="hover:text-white transition-colors">Articles</a>
+                {% if isLogged %}
+                <a href="/posts/new" class="hover:text-white transition-colors">New post</a>
+                {% endif %}
+                <span class="text-zinc-800">|</span>
+                {% if isLogged %}
+                <a href="/account" class="text-red-500 hover:text-red-400 transition-colors">{{ loggedUser.username }}</a>
+                {% else %}
+                <a href="/users/login" class="text-red-500 hover:text-red-400 transition-colors">→ Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    <!-- Contenu de la page -->
+    {% endblock %}
+    <footer class="border-t border-zinc-900 mt-16 py-8 text-center text-xs text-zinc-700">
+        <p>© 2026 KainoVaii — MIT License {% if isLogged %}| <a href="/users/logout" class="text-red-500 hover:text-red-400 transition-colors">Disconnect</a>{% endif %}</p>
+    </footer>
+    {{ flash() | raw }}
+    {{ livecomponents_scripts | raw }}
+</body>
+</html>

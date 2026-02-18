@@ -1,0 +1,29 @@
+{% extends "view/layout/front.html" %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 py-12">
+    <div class="mb-12">
+        <div class="flex items-baseline gap-4 mb-3">
+            <h1 class="text-4xl font-bold text-white tracking-tight">Articles_</h1>
+            <span class="text-red-500 text-xl animate-pulse-dot">●</span>
+        </div>
+    </div>
+
+    {% for post in posts %}
+    <a href="/posts/s/{{ post.slug }}" class="card-link block bg-zinc-950 border border-zinc-800 hover:border-red-500/40 transition-colors p-8 mb-px">
+        <h2 class="text-white text-2xl font-bold leading-snug mb-3 hover:text-red-400 transition-colors">
+            {{ post.title }}
+        </h2>
+        <p class="text-zinc-600 text-sm leading-relaxed mb-6 max-w-2xl">
+            {{ post.content | striptags | abbreviate(200) }}
+        </p>
+        <div class="flex items-center justify-between">
+            <div class="flex gap-6 text-xs text-zinc-700">
+                <span>{{ post.createdAt }}</span>
+                <span>{{ post.user }}</span>
+            </div>
+            <span class="text-red-500 card-arrow">→</span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
