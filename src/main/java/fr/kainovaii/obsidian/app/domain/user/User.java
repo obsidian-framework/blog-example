@@ -1,8 +1,9 @@
 package fr.kainovaii.obsidian.app.domain.user;
 
+import fr.kainovaii.obsidian.app.security.AppUserDetails;
 import org.javalite.activejdbc.Model;
 
-public class User extends Model
+public class User extends Model implements AppUserDetails
 {
     // Getters
     public String getUsername() {

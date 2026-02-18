@@ -40,30 +40,28 @@
         <div class="flex items-baseline gap-4 mb-6">
             <h2 class="text-xl font-bold text-white tracking-tight">Security_</h2>
         </div>
-        <form method="POST" action="/users/profile/password" class="space-y-5 mb-10">
+        <form method="POST" action="/users/update/password" class="space-y-5 mb-10">
             {{ csrf_field() | raw }}
-            <div>
-                <label class="block text-xs text-zinc-500 uppercase tracking-widest mb-2">Current password</label>
-                <div class="input-wrap">
-                    <input class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 text-sm outline-none transition-colors"
-                           type="password" name="current_password" placeholder="••••••••">
-                    <div class="input-line"></div>
-                </div>
-            </div>
             <div>
                 <label class="block text-xs text-zinc-500 uppercase tracking-widest mb-2">New password</label>
                 <div class="input-wrap">
                     <input class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 text-sm outline-none transition-colors"
-                           type="password" name="new_password" placeholder="••••••••">
+                           value="{{ old('password') }}" type="password" name="password" placeholder="••••••••">
                     <div class="input-line"></div>
+                </div>
+                <div class="flex items-center justify-between mt-1.5">
+                    <p class="mt-1.5 text-xs text-red-500">{{ error('password') }}</p>
                 </div>
             </div>
             <div>
                 <label class="block text-xs text-zinc-500 uppercase tracking-widest mb-2">Confirm new password</label>
                 <div class="input-wrap">
                     <input class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 text-sm outline-none transition-colors"
-                           type="password" name="confirm_password" placeholder="••••••••">
+                           type="password" name="password_confirm" placeholder="••••••••">
                     <div class="input-line"></div>
+                </div>
+                <div class="flex items-center justify-between mt-1.5">
+                    <p class="mt-1.5 text-xs text-red-500">{{ error('password_confirm') }}</p>
                 </div>
             </div>
             <div class="pt-2">

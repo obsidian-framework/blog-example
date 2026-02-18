@@ -4,6 +4,7 @@ import fr.kainovaii.obsidian.app.domain.post.Post;
 import fr.kainovaii.obsidian.app.domain.post.PostRepository;
 import fr.kainovaii.obsidian.app.domain.user.User;
 import fr.kainovaii.obsidian.app.domain.user.UserRepository;
+import fr.kainovaii.obsidian.app.security.AppUserDetails;
 import fr.kainovaii.obsidian.database.DB;
 import fr.kainovaii.obsidian.http.controller.BaseController;
 import fr.kainovaii.obsidian.http.controller.annotations.Controller;
@@ -46,7 +47,7 @@ public class UserController extends BaseController
     @CsrfProtect
     @HasRole("DEFAULT")
     @POST(value = "/users/update", name = "user.update")
-    private Object update(Request req, Response res, UserRepository userRepository, PostRepository postRepository)
+    private Object update(Request req, Response res, UserRepository userRepository)
     {
         ValidationResult result = RequestValidator.validateSafe(req, Map.of(
             "username", "required|min:5",
@@ -60,6 +61,52 @@ public class UserController extends BaseController
             ));
         }
 
+        if (result.isValid()) {
+            DB.withConnection(() -> {
+                return userRepository.update(
+                    getLoggedUser(req).getUsername(),
+                    req.queryParams("username"),
+                    req.queryParams("email"),
+                    getLoggedUser(req).getPassword(),
+                    getLoggedUser(req).getRole()
+                );
+            });
+            return redirectWithFlash(req, res, "success","Update successfully", "/users/settings");
+        }
+        return redirectWithFlash(req, res, "info","You have been redirected", "/");
+    }
+
+    @CsrfProtect
+    @HasRole("DEFAULT")
+    @POST(value = "/users/update/password", name = "user.update.password")
+    private Object updatePassword(Request req, Response res, UserRepository userRepository)
+    {
+        AppUserDetails user = getLoggedUser(req);
+
+        ValidationResult result = RequestValidator.validateSafe(req, Map.of(
+            "password", "required|min:8",
+            "password_confirm", "required|min:8"
+        ));
+
+        if (result.fails()) {
+            return render("user/settings.html", Map.of(
+                "errors", result.getErrors(),
+                "old", req.queryMap().toMap()
+            ));
+        }
+
+        if (result.isValid()) {
+            DB.withConnection(() -> {
+                return userRepository.update(
+                    user.getUsername(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    hashPassword(req.queryParams("password")),
+                    user.getRole()
+                );
+            });
+            return redirectWithFlash(req, res, "success","Update successfully", "/users/settings");
+        }
         return redirectWithFlash(req, res, "info","You have been redirected", "/");
     }
 }

@@ -17,7 +17,7 @@ public class AppUserDetailsService implements UserDetailsService
     }
 
     @Override
-    public UserDetails loadByUsername(String username)
+    public AppUserDetails loadByUsername(String username)
     {
         return DB.withConnection(() -> {
             if (!UserRepository.userExist(username)) return null;
@@ -27,7 +27,7 @@ public class AppUserDetailsService implements UserDetailsService
     }
 
     @Override
-    public UserDetails loadById(Object id)
+    public AppUserDetails loadById(Object id)
     {
         return DB.withConnection(() -> {
             User user = User.findById(id);
@@ -35,15 +35,14 @@ public class AppUserDetailsService implements UserDetailsService
         });
     }
 
-    private UserDetails adapt(User user)
-    {
+    private AppUserDetails adapt(User user) {
         if (user == null) return null;
-        return new UserDetails() {
+        return new AppUserDetails() {
             public Object getId() { return user.getId(); }
             public String getUsername() { return user.getUsername(); }
             public String getPassword() { return user.getPassword(); }
             public String getRole() { return user.getRole(); }
-            public boolean isEnabled() { return true; }
+            public String getEmail() { return user.getEmail(); }
         };
     }
 }
