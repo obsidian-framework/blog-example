@@ -20,7 +20,7 @@
                 {% endif %}
                 <span class="text-zinc-800">|</span>
                 {% if isLogged %}
-                <a href="/account" class="text-red-500 hover:text-red-400 transition-colors">{{ loggedUser.username }}</a>
+                <a href="/users/{{ loggedUser.username }}" class="text-red-500 hover:text-red-400 transition-colors">{{ loggedUser.username }}</a>
                 {% else %}
                 <a href="/users/login" class="text-red-500 hover:text-red-400 transition-colors">→ Login</a>
                 {% endif %}

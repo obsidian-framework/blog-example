@@ -18,13 +18,13 @@ public class UserRepository
         return User.findFirst("username = ?", username) != null;
     }
 
-    public void create(String username, String email, String password, String role)
+    public Boolean create(String username, String email, String password, String role)
     {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(password);
         user.setRole(role);
-        user.saveIt();
+        return user.saveIt();
     }
 }

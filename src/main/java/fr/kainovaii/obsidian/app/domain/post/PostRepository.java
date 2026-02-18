@@ -14,6 +14,10 @@ public class PostRepository
         return Post.findFirst("slug = ?", slug);
     }
 
+    public LazyList<Post> findByUser(String user) {
+        return Post.where("user = ?", user);
+    }
+
     public boolean create(String slug, String title, String content, String user)
     {
         Post post = new Post();

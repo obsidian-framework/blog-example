@@ -18,7 +18,7 @@ public class LoginController extends BaseController
     @GET("/users/login")
     private Object login(Request req, Response res)
     {
-        return render("users/login.html", Map.of());
+        return render("user/login.html", Map.of());
     }
 
     @CsrfProtect
