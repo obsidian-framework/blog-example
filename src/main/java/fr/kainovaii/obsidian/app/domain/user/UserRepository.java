@@ -27,4 +27,14 @@ public class UserRepository
         user.setRole(role);
         return user.saveIt();
     }
+
+    public Boolean update(String usernameCurrent, String username, String email, String password, String role)
+    {
+        User user = findByUsername(usernameCurrent);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setRole(role);
+        return user.saveIt();
+    }
 }

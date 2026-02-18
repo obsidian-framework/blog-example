@@ -1,6 +1,6 @@
 {% extends "view/layout/front.html" %}
 {% block content %}
-<div class="max-w-3xl mx-auto px-6 py-12">
+<div class="max-w-4xl mx-auto px-6 py-12">
     <a href="/" class="group inline-flex items-center gap-2 text-zinc-600 text-sm hover:text-red-500 transition-colors mb-10">
         <span class="group-hover:-translate-x-1 transition-transform inline-block">←</span>
         Back to articles
@@ -16,7 +16,7 @@
         <div class="flex items-center gap-6 text-xs text-zinc-700 pb-6 border-b border-zinc-900 flex-wrap">
             <span>{{ post.createdAt }}</span>
             <span class="text-zinc-800">|</span>
-            <span>{{ post.user }}</span>
+            <span><a href="/users/s/{{ post.user }}" class="text-red-500 hover:text-red-400 transition-colors">{{ post.user }}</a></span>
             {% if isLogged %}
                 {% if loggedUser.username == post.user %}
                 <span class="text-zinc-800">|</span>
@@ -33,6 +33,5 @@
     <div class="flex items-center justify-between text-xs text-zinc-700 mt-10">
         <a href="/" class="hover:text-red-500 transition-colors">← All articles</a>
     </div>
-
 </div>
 {% endblock %}
