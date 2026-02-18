@@ -2,32 +2,43 @@
 {% block content %}
 <div class="flex-1 flex items-center justify-center px-6 py-12">
     <div class="w-full max-w-sm">
-        <!-- Logo / icon -->
         <div class="flex flex-col items-center mb-8">
             <h1 class="text-2xl font-bold text-white tracking-tight animate-glitch mb-1">
-                Welcome back_
+                Welcome_
             </h1>
-            <p class="text-xs text-zinc-600">Sign in to manage your blog</p>
+            <p class="text-xs text-zinc-600">Register</p>
         </div>
 
-        <!-- Alert -->
-        <div id="alert" class="hidden text-xs px-4 py-3 border mb-5"></div>
-
-        <!-- Form -->
-        <form id="login-form" class="space-y-5" method="POST" action="/users/login">
+        <form id="login-form" class="space-y-5" method="POST" action="/users/register">
             {{ csrf_field() | raw }}
             <div>
                 <label for="username" class="block text-xs text-zinc-500 uppercase tracking-widest mb-2">
-                    Email
+                    Username
                 </label>
                 <div class="input-wrap">
                     <input
                             id="username" name="username" type="text"
-                            placeholder="you@example.com"
-                            autocomplete="email"
                             class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 text-sm outline-none transition-colors"
                     >
                     <div class="input-line"></div>
+                </div>
+                <div class="flex items-center justify-between mt-1.5">
+                    <p class="mt-1.5 text-xs text-red-500">{{ error('username') }}</p>
+                </div>
+            </div>
+            <div>
+                <label for="email" class="block text-xs text-zinc-500 uppercase tracking-widest mb-2">
+                    Email
+                </label>
+                <div class="input-wrap">
+                    <input
+                            id="email" name="email" type="text"
+                            class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 text-sm outline-none transition-colors"
+                    >
+                    <div class="input-line"></div>
+                </div>
+                <div class="flex items-center justify-between mt-1.5">
+                    <p class="mt-1.5 text-xs text-red-500">{{ error('email') }}</p>
                 </div>
             </div>
             <div>
@@ -40,22 +51,23 @@
                     <input
                             id="password" name="password" type="password"
                             placeholder="••••••••"
-                            autocomplete="current-password"
                             class="peer w-full bg-zinc-950 border border-zinc-800 focus:border-red-500/50 text-zinc-300 placeholder-zinc-700 px-3 py-2.5 pr-12 text-sm outline-none transition-colors"
                     >
                     <div class="input-line"></div>
                 </div>
+                <div class="flex items-center justify-between mt-1.5">
+                    <p class="mt-1.5 text-xs text-red-500">{{ error('password') }}</p>
+                </div>
             </div>
 
-            <button id="submit-btn" type="submit"
-                    class="w-full bg-red-500 hover:bg-red-600 active:scale-99 text-black font-bold text-xs uppercase tracking-widest py-3 transition-colors">
-                Sign In →
+            <button id="submit-btn" type="submit" class="w-full bg-red-500 hover:bg-red-600 active:scale-99 text-black font-bold text-xs uppercase tracking-widest py-3 transition-colors">
+                Sign Up →
             </button>
         </form>
 
         <p class="text-center text-xs text-zinc-700 mt-6">
-            No account yet?
-            <a href="/users/register" class="text-red-500 hover:text-red-400 transition-colors ml-1">Create one →</a>
+            You are account ?
+            <a href="/users/login" class="text-red-500 hover:text-red-400 transition-colors ml-1">Login →</a>
         </p>
     </div>
 </div>
