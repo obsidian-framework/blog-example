@@ -1,17 +1,11 @@
 package fr.kainovaii.obsidian.app.http.controllers;
 
-import fr.kainovaii.obsidian.app.domain.post.PostRepository;
-import fr.kainovaii.obsidian.app.domain.user.User;
-import fr.kainovaii.obsidian.app.domain.user.UserRepository;
-import fr.kainovaii.obsidian.database.DB;
 import fr.kainovaii.obsidian.http.controller.BaseController;
 import fr.kainovaii.obsidian.http.controller.annotations.Controller;
 import fr.kainovaii.obsidian.routing.methods.GET;
 import fr.kainovaii.obsidian.routing.methods.POST;
 import fr.kainovaii.obsidian.security.csrf.annotations.CsrfProtect;
 import fr.kainovaii.obsidian.security.role.HasRole;
-import fr.kainovaii.obsidian.validation.RequestValidator;
-import fr.kainovaii.obsidian.validation.ValidationResult;
 import spark.Request;
 import spark.Response;
 import spark.Session;

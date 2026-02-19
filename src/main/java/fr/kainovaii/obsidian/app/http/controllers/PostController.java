@@ -94,6 +94,7 @@ public class PostController extends BaseController
     private Object postSingle(Request req, PostRepository postRepository)
     {
         Post post = DB.withConnection(() -> postRepository.findBySlug(req.params("slug")));
+        System.out.println("user: " + post.getString("user"));
         return render("post/single.html", Map.of( "post", post ));
     }
 

@@ -17,7 +17,6 @@ import fr.kainovaii.obsidian.validation.ValidationResult;
 import spark.Request;
 import spark.Response;
 
-import java.text.Normalizer;
 import java.util.List;
 import java.util.Map;
 

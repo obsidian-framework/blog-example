@@ -7,7 +7,6 @@ import fr.kainovaii.obsidian.http.controller.annotations.Controller;
 import fr.kainovaii.obsidian.routing.methods.GET;
 import fr.kainovaii.obsidian.routing.methods.POST;
 import fr.kainovaii.obsidian.security.csrf.annotations.CsrfProtect;
-import fr.kainovaii.obsidian.security.role.HasRole;
 import fr.kainovaii.obsidian.validation.RequestValidator;
 import fr.kainovaii.obsidian.validation.ValidationResult;
 import spark.Request;

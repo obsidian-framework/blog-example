@@ -18,7 +18,7 @@
         </p>
         <div class="flex items-center justify-between">
             <div class="flex gap-6 text-xs text-zinc-700">
-                <span>{{ post.createdAt }}</span>
+                <span>{{ post.createdAt | date("dd MMM yyy") }}</span>
                 <span><a href="/users/s/{{ post.user }}" class="text-red-500 hover:text-red-400 transition-colors">{{ post.user }}</a></span>
             </div>
             <span class="text-red-500 card-arrow">→</span>

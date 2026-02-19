@@ -23,7 +23,10 @@ public class Post extends Model
         return getString("user");
     }
 
-    public String getCreatedAt() { return getString("created_at"); }
+    public Date createdAt() {
+        Long timestamp = getLong("created_at");
+        return timestamp != null ? new Date(timestamp) : null;
+    }
 
     // Setters
     public void setSlug(String slug) {
