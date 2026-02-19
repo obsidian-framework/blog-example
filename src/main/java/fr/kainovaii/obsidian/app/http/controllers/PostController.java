@@ -2,6 +2,7 @@ package fr.kainovaii.obsidian.app.http.controllers;
 
 import fr.kainovaii.obsidian.app.domain.post.Post;
 import fr.kainovaii.obsidian.app.domain.post.PostRepository;
+import fr.kainovaii.obsidian.app.utils.TextUtile;
 import fr.kainovaii.obsidian.database.DB;
 import fr.kainovaii.obsidian.http.controller.BaseController;
 import fr.kainovaii.obsidian.http.controller.annotations.Controller;
@@ -42,7 +43,7 @@ public class PostController extends BaseController
 
         if (result.isValid()) {
             Boolean creatingPost = DB.withConnection(() -> postRepository.create(
-                    slugify(req.queryParams("title")),
+                    TextUtile.slugify(req.queryParams("title")),
                     req.queryParams("title"),
                     req.queryParams("content"),
                     getLoggedUser(req).getUsername()
@@ -79,7 +80,7 @@ public class PostController extends BaseController
         if (result.isValid()) {
             Boolean creatingPost = DB.withConnection(() -> postRepository.update(
                 req.queryParams("slug"),
-                slugify(req.queryParams("title")),
+                TextUtile.slugify(req.queryParams("title")),
                 req.queryParams("title"),
                 req.queryParams("content"),
                 getLoggedUser(req).getUsername()
@@ -89,7 +90,6 @@ public class PostController extends BaseController
         return redirectWithFlash(req, res, "info","You have been redirected", "/");
     }
 
-
     @GET(value = "/posts/s/:slug", name = "post.single")
     private Object postSingle(Request req, PostRepository postRepository)
     {
@@ -98,15 +98,12 @@ public class PostController extends BaseController
         return render("post/single.html", Map.of( "post", post ));
     }
 
-    public static String slugify(String input)
+    @HasRole("DEFAULT")
+    @POST(value = "/posts/delete")
+    public Object delete(Request req, Response res, PostRepository postRepository)
     {
-        if (input == null || input.isEmpty()) return "";
-        return Normalizer.normalize(input, Normalizer.Form.NFD)
-            .replaceAll("[\\p{InCombiningDiacriticalMarks}]", "")
-            .toLowerCase()
-            .replaceAll("[^a-z0-9\\s-]", "")
-            .trim()
-            .replaceAll("[\\s]+", "-")
-            .replaceAll("-+", "-");
+        boolean query = DB.withConnection(() -> postRepository.delete(req.queryParams("slug")));
+        if (query) return redirectWithFlash(req, res, "info","Deleting successfully", "/");
+        return redirectWithFlash(req, res, "info","You have been redirected", "/");
     }
 }

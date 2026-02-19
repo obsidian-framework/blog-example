@@ -18,6 +18,12 @@ public class PostRepository
         return Post.where("user = ?", user);
     }
 
+    public boolean delete(String slug)
+    {
+        Post post = findBySlug(slug);
+        return post.delete();
+    }
+
     public boolean create(String slug, String title, String content, String user)
     {
         Post post = new Post();

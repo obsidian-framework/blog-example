@@ -73,7 +73,7 @@
         <div class="border border-red-500/20 bg-red-500/[0.03] p-6">
             <h3 class="text-xs font-bold text-red-500 uppercase tracking-widest mb-2">Danger Zone</h3>
             <p class="text-xs text-zinc-600 mb-4">Once you delete your account, there is no going back.</p>
-            <form method="POST" action="/users/profile/delete">
+            <form method="POST" action="/users/delete">
                 {{ csrf_field() | raw }}
                 <button type="submit" class="text-xs text-red-500 border border-red-500/30 hover:border-red-500/60 font-bold uppercase tracking-widest px-4 py-2 transition-colors">
                     Delete account

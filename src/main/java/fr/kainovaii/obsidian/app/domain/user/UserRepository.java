@@ -18,6 +18,12 @@ public class UserRepository
         return User.findFirst("username = ?", username) != null;
     }
 
+    public boolean delete(String username)
+    {
+        User user = findByUsername(username);
+        return user.delete();
+    }
+
     public Boolean create(String username, String email, String password, String role)
     {
         User user = new User();

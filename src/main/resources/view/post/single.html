@@ -21,6 +21,11 @@
                 {% if loggedUser.username == post.user %}
                 <span class="text-zinc-800">|</span>
                 <a href="/posts/edit/{{ post.slug }}" class="text-red-500 hover:text-red-400 transition-colors">Edit post</a>
+                <span class="text-zinc-800">|</span>
+                <form action="/posts/delete" method="POST">
+                    <input type="hidden" name="slug" value="{{ post.slug }}">
+                    <button type="submit" class="text-red-500 hover:text-red-400 transition-colors">Delete post</button>
+                </form>
                 {% endif %}
             {% endif %}
         </div>

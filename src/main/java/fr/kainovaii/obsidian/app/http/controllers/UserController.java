@@ -108,4 +108,15 @@ public class UserController extends BaseController
         }
         return redirectWithFlash(req, res, "info","You have been redirected", "/");
     }
+
+    @HasRole("DEFAULT")
+    @POST(value = "/users/delete")
+    public Object deleteUser(Request req, Response res, UserRepository userRepository)
+    {
+        boolean query = DB.withConnection(() -> userRepository.delete(getLoggedUser(req).getUsername()));
+
+        if (query) return redirectWithFlash(req, res, "success","Deleting successfully", "/users/login");
+
+        return redirectWithFlash(req, res, "info","You have been redirected", "/");
+    }
 }
