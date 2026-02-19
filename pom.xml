@@ -15,7 +15,7 @@
   <repositories>
     <repository>
       <id>github</id>
-      <url>https://maven.pkg.github.com/kainovaii/spark-core</url>
+      <url>https://maven.pkg.github.com/obsidian-framework/core</url>
     </repository>
   </repositories>
   <dependencies>

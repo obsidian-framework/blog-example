@@ -1,16 +1,19 @@
 package fr.kainovaii.obsidian.app.domain.post;
 
-import fr.kainovaii.obsidian.app.domain.user.UserRepository;
 import fr.kainovaii.obsidian.database.DB;
+import fr.kainovaii.obsidian.database.seeder.SeederInterface;
 import fr.kainovaii.obsidian.database.seeder.annotations.Seeder;
+import fr.kainovaii.obsidian.di.annotations.Inject;
 
 @Seeder(priority = 10)
-public class PostSeeder
+public class PostSeeder implements SeederInterface
 {
-    public static void seed()
-    {
-        PostRepository postRepository = new PostRepository();
+    @Inject
+    private PostRepository postRepository;
 
+    @Override
+    public void seed()
+    {
         DB.withConnection(() -> {
             if (postRepository.findAll().isEmpty()) {
                 postRepository.create("fore-magna-nostris-et-propinqua", "Fore magna nostris et propinqua.", "Ultima Syriarum est Palaestina per intervalla magna protenta, cultis abundans terris et nitidis et civitates habens quasdam egregias, nullam nulli cedentem sed sibi vicissim velut ad perpendiculum aemulas: Caesaream, quam ad honorem Octaviani principis exaedificavit Herodes, et Eleutheropolim et Neapolim itidemque Ascalonem Gazam aevo superiore exstructas.", "admin");
