@@ -78,14 +78,16 @@ public class PostController extends BaseController
         }
 
         if (result.isValid()) {
+            String slug = req.queryParams("slug");
+
             Boolean creatingPost = DB.withConnection(() -> postRepository.update(
-                req.queryParams("slug"),
+                slug,
                 TextUtile.slugify(req.queryParams("title")),
                 req.queryParams("title"),
                 req.queryParams("content"),
                 getLoggedUser(req).getUsername()
             ));
-            if (creatingPost) return redirectWithFlash(req, res, "info","Creating successfully", "/");
+            if (creatingPost) return redirectWithFlash(req, res, "info","Updating successfully", "/posts/s/" + slug);
         }
         return redirectWithFlash(req, res, "info","You have been redirected", "/");
     }
@@ -94,7 +96,6 @@ public class PostController extends BaseController
     private Object postSingle(Request req, PostRepository postRepository)
     {
         Post post = DB.withConnection(() -> postRepository.findBySlug(req.params("slug")));
-        System.out.println("user: " + post.getString("user"));
         return render("post/single.html", Map.of( "post", post ));
     }
 
