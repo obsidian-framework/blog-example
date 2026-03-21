@@ -1,6 +1,7 @@
-package fr.kainovaii.obsidian.app.domain.post;
+package com.obsidian.blog.app.domain.post;
 
-import org.javalite.activejdbc.Model;
+
+import com.obsidian.core.database.orm.model.Model;
 
 import java.util.Date;
 
@@ -24,8 +25,8 @@ public class Post extends Model
     }
 
     public Date createdAt() {
-        Long timestamp = getLong("created_at");
-        return timestamp != null ? new Date(timestamp) : null;
+        long timestamp = getLong("created_at");
+        return new Date(timestamp);
     }
 
     // Setters

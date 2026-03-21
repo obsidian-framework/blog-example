@@ -1,6 +1,6 @@
-package fr.kainovaii.obsidian.app.domain.post;
+package com.obsidian.blog.app.domain.post;
 
-import fr.kainovaii.obsidian.database.Migration;
+import com.obsidian.core.database.Migration;
 
 public class CreatePostTable extends Migration
 {

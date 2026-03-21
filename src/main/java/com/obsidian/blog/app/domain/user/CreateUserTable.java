@@ -1,6 +1,6 @@
-package fr.kainovaii.obsidian.app.domain.user;
+package com.obsidian.blog.app.domain.user;
 
-import fr.kainovaii.obsidian.database.Migration;
+import com.obsidian.core.database.Migration;
 
 public class CreateUserTable extends Migration
 {

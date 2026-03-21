@@ -1,4 +1,4 @@
-package fr.kainovaii.obsidian.app.utils;
+package com.obsidian.blog.app.utils;
 
 import java.text.Normalizer;
 

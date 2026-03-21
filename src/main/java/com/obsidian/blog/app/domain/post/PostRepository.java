@@ -1,21 +1,22 @@
-package fr.kainovaii.obsidian.app.domain.post;
+package com.obsidian.blog.app.domain.post;
 
-import fr.kainovaii.obsidian.di.annotations.Repository;
-import org.javalite.activejdbc.LazyList;
+import com.obsidian.core.database.orm.repository.BaseRepository;
+import com.obsidian.core.di.annotations.Repository;
+
+import java.util.Collections;
+import java.util.List;
 
 @Repository
-public class PostRepository
+public class PostRepository extends BaseRepository<Post>
 {
-    public LazyList<Post> findAll() {
-        return Post.findAll();
-    }
+    public PostRepository() { super(Post.class); }
 
     public Post findBySlug(String slug) {
-        return Post.findFirst("slug = ?", slug);
+        return findBy("slug", slug);
     }
 
-    public LazyList<Post> findByUser(String user) {
-        return Post.where("user = ?", user);
+    public List<Post> findByUser(String user) {
+        return Collections.singletonList(findBy("user", user));
     }
 
     public boolean delete(String slug)

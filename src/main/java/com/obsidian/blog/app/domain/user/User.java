@@ -1,7 +1,7 @@
-package fr.kainovaii.obsidian.app.domain.user;
+package com.obsidian.blog.app.domain.user;
 
-import fr.kainovaii.obsidian.app.security.AppUserDetails;
-import org.javalite.activejdbc.Model;
+import com.obsidian.blog.app.security.AppUserDetails;
+import com.obsidian.core.database.orm.model.Model;
 
 public class User extends Model implements AppUserDetails
 {

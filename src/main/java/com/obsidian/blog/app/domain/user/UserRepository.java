@@ -1,21 +1,22 @@
-package fr.kainovaii.obsidian.app.domain.user;
+package com.obsidian.blog.app.domain.user;
 
-import fr.kainovaii.obsidian.di.annotations.Repository;
-import org.javalite.activejdbc.LazyList;
+
+import com.obsidian.core.database.orm.repository.BaseRepository;
+import com.obsidian.core.di.annotations.Repository;
+
+import java.util.List;
 
 @Repository
-public class UserRepository
+public class UserRepository extends BaseRepository<User>
 {
-    public LazyList<User> findAll() {
-        return User.findAll();
-    }
+    public UserRepository () { super (User.class); }
 
     public User findByUsername(String username) {
-        return User.findFirst("username = ?", username);
+        return findBy("username", username);
     }
 
-    public static boolean userExist(String username) {
-        return User.findFirst("username = ?", username) != null;
+    public boolean userExist(String username) {
+        return existsWhere("username", username);
     }
 
     public boolean delete(String username)
